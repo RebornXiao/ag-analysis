@@ -3,11 +3,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <link rel="shortcut icon" href="/images/title.ico"/>
-    <link rel="Bookmark" href="/images/title.ico"/>
+    <link rel="shortcut icon" href="images/title.ico"/>
+    <link rel="Bookmark" href="images/title.ico"/>
     <title>Title</title>
-    <script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
-    <script>
+    <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+
         function btn() {
             $.ajax({
                 url: '/ag/all',
@@ -63,11 +64,64 @@
                 }
             });
         }
+
+
         //1、最基本的弹出窗口代码
         function btn2() {
 //            window.open('page.html', 'newwindow', 'height=100, width=400, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no') //这句要写成一行
-            openwin();
+            //openwin();
+            var obj = new Object();
+            obj.name = "test";
+            window.showModalDialog("detail", obj, "dialogWidth=200px;dialogHeight=100px");
+
         }
+
+        /***
+         * @param {string} cookieName Cookie名称
+         * @param {string} cookieValue Cookie值
+         * @param {number} nDays Cookie过期天数
+         */
+        function SetCookie(cookieName, cookieValue, nDays) {
+            /*当前日期*/
+            var today = new Date();
+            /*Cookie过期时间*/
+            var expire = new Date();
+            /*如果未设置nDays参数或者nDays为0，取默认值1*/
+            if (nDays == null || nDays == 0) nDays = 1;
+            /*计算Cookie过期时间*/
+            expire.setTime(today.getTime() + 3600000 * 24 * nDays);
+            /*设置Cookie值*/
+            document.cookie = cookieName + "=" + escape(cookieValue)
+                + ";expires=" + expire.toGMTString();
+        }
+
+        function login1() {
+            var username = $("user").value;
+            var password = $("pass").value;
+            //alert(111);
+            /*是否选中7天内无需登录*/
+            var save = $("save").checked;
+            if (username != "admin") {
+
+            }
+            //  if (password == "admin") {
+            if (save) {
+                SetCookie("username", username, 7);
+                SetCookie("password", password, 1);
+            }
+            /*跳转到ex8.html页面*/
+            document.location = "detail.html";
+            //document.location = "all";
+
+            //document.location.href="detail";
+//            } else {
+//                alert("用户名或密码错误！");
+//            }
+        }
+
+        //        function $(id) {
+        //            return document.getElementById(id);
+        //        }
 
         function openwin() {
             window.open("page", "", "width=200,height=200")
@@ -89,21 +143,37 @@
             return returnvalue;
         }
 
-        function loadpopup() {
-            if (get_cookie('popped') == '') {
-                openwin()
-                document.cookie = "popped=yes"
+        window.location.href = "https://www.google.com/search?q=hello&oq=hello"
+        function parseURL(url){
+            var url = url.split("?")[1];
+            var para = url.split("&");
+            var len = para.length;
+            var res = {};
+            var arr = [];
+            for(var i=0;i<len;i++){
+                arr = para.split("=");
+                res[arr[0]] = arr[1];
             }
+            return res;
         }
+
+
     </script>
 </head>
 <body>
-<button id="btn" onclick="btn()">11111</button>
-<button id="btn1" onclick="btn1()">22222</button>
-<button id="btn2" onclick="btn2()">33333</button>
+<button id="btn" onclick="btn()"> 11111</button>
+<button id="btn1" onclick="btn1()"> 22222</button>
+<button id="btn2" onclick="btn2()"> 33333</button>
 <img id="img" src="/images/logo.png"/>
-<label id="label">哈哈~~~~~</label>
-<ul id="list">
-</ul>
+<label id="label"> 哈哈 ~~~~~ </label>
+<div id="main">
+    <div><span>用户名：</span><input type="text" id="user"/></div>
+    <div><span>密码：</span><input type="password" id="pass"/></div>
+    <div>
+        <input type="checkbox" id="save" checked="checked"/>
+        <button id="login1" onclick="login1()">登录</button>
+    </div>
+</div>
+<ul id="list"></ul>
 </body>
 </html>

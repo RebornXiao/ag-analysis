@@ -15,4 +15,18 @@ public class PageController {
     public String page(){
         return  "page";
     }
+
+    @RequestMapping("detail")
+    public String detail(){
+        return  "detail";
+    }
+
+    @RequestMapping("all")
+    public String all(){
+        return  "main/all";
+    }
+    @RequestMapping("main")
+    public String main(){
+        return  "main/main";
+    }
 }
