@@ -2,9 +2,7 @@ package com.example.demo.action;
 
 import com.example.demo.model.*;
 import com.example.demo.service.*;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -57,6 +55,19 @@ public class AgDataController {
     int day300 = 0;
     int dayBig = 0;
 
+    @ResponseBody
+    @RequestMapping(value = "get/{id}", method = RequestMethod.GET)
+    public AgData getOne(@PathVariable Integer id) {
+        AgData agData = agDataService.findOne(id);
+        return agData;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "json/{str}", method = RequestMethod.GET)
+    public String getStr(@PathVariable String str) {
+        System.out.println("请求参数" + str);
+        return str;
+    }
 
     @RequestMapping("put")
     public String put() {
@@ -65,15 +76,12 @@ public class AgDataController {
         return "ok";
     }
 
-    @RequestMapping("all")
+    @RequestMapping(value = "all")
+    @ResponseBody
     public Iterable<AgData> getAll() {
         return agDataService.getAll();
     }
 
-    @RequestMapping("one")
-    public AgData getOne(Integer id) {
-        return agDataService.findOne(id);
-    }
 
     @RequestMapping("init")
     public String initData() {
@@ -113,11 +121,9 @@ public class AgDataController {
     }
 
     @RequestMapping("data")
-    public void getData(){
+    public void getData() {
         agData200Service.save(agDataService.testPriceAdd());
     }
-
-
 
 
 }
