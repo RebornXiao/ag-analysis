@@ -43,7 +43,7 @@
             var aa = 12;
             $.ajax({
                 url: "/ag/get/" + aa,
-                type:"GET",
+                type: "GET",
                 contentType: 'application/json;charset=utf-8',
                 data: "json",
                 cache: false,
@@ -63,11 +63,44 @@
                 }
             });
         }
+        //1、最基本的弹出窗口代码
+        function btn2() {
+//            window.open('page.html', 'newwindow', 'height=100, width=400, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no') //这句要写成一行
+            openwin();
+        }
+
+        function openwin() {
+            window.open("page", "", "width=200,height=200")
+        }
+
+        function get_cookie(Name) {
+            var search = Name + "="
+            var returnvalue = "";
+            if (document.cookie.length > 0) {
+                offset = document.cookie.indexOf(search)
+                if (offset != -1) {
+                    offset += search.length
+                    end = document.cookie.indexOf(";", offset);
+                    if (end == -1)
+                        end = document.cookie.length;
+                    returnvalue = unescape(document.cookie.substring(offset, end))
+                }
+            }
+            return returnvalue;
+        }
+
+        function loadpopup() {
+            if (get_cookie('popped') == '') {
+                openwin()
+                document.cookie = "popped=yes"
+            }
+        }
     </script>
 </head>
 <body>
 <button id="btn" onclick="btn()">11111</button>
 <button id="btn1" onclick="btn1()">22222</button>
+<button id="btn2" onclick="btn2()">33333</button>
 <img id="img" src="/images/logo.png"/>
 <label id="label">哈哈~~~~~</label>
 <ul id="list">

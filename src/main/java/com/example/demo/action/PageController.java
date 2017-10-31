@@ -10,4 +10,9 @@ public class PageController {
     public String list(){
         return  "list";
     }
+
+    @RequestMapping("page")
+    public String page(){
+        return  "page";
+    }
 }
