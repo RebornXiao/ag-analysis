@@ -22,7 +22,7 @@ $(function () {
                     //循环获取数据
                     var time = json[index].time;
                     $("#list").append(" <li value = "+time+">"+time+"</li>");
-                    
+
                    // addLi(time);
                    // $("#list").html($("#list").html() + time + " <br/> ");
                 });
@@ -33,18 +33,15 @@ $(function () {
     $('#test1').bind('click', function () {
 
         var list = document.getElementsByTagName("li");
-        alert(list.length);
+        //alert(list.length);
         //给每个li绑定事件
         for (var i = 0; i < list.length; i++) {
-            alert(i);
+            //alert(i);
             list[i].onclick = function () {
-//弹出对应的li节点里面的内容
-                alert(this.innerHTML);
-//将节点的颜色变成红色
-                this.style.color = "red";
+                document.location ="detail.html?username="+$(this).text();
             }
         }
-        alert(55555);
+
     });
 
     function addLi(username) {
