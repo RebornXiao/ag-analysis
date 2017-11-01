@@ -10,139 +10,21 @@
     <script type="text/javascript">
 
         function btn() {
-            $.ajax({
-                url: '/ag/all',
-                type: "GET",
-                contentType: 'application/json;charset=utf-8',
-                data: "json",
-                cache: false,
-                beforeSend: function () {
-                    $("#list").html('加载中...');
-                }, //加载执行方法
-                error: function () {
-                    alert("error");
-                },  //错误执行方法
-                //成功执行方法
-                success: function (response) {
-                    $("#list").html('');
-                    var json = eval(response); //数组
-                    console.log(json);//可以在控制台查看打印的data值
-                    $.each(json, function (index, item) {
-                        //循环获取数据
-                        var time = json[index].time;
-                        var open_price = json[index].open_price;
-                        var max_price = json[index].max_price;
-                        $("#list").html($("#list").html() + time + " - " + open_price + " - " + max_price + " <br/> ");
-                    });
-                    document.getElementById("btn").value = json[23].open_price;
-                    $("label").html("aaaa");
-                }
-            });
+
         }
 
         function btn1() {
-            var aa = 12;
-            $.ajax({
-                url: "/ag/get/" + aa,
-                type: "GET",
-                contentType: 'application/json;charset=utf-8',
-                data: "json",
-                cache: false,
-                beforeSend: function () {
-                    $("#list").html('加载中...');
-                }, //加载执行方法
-                error: function () {
-                    alert("error");
-                },  //错误执行方法
-                //成功执行方法
-                success: function (response) {
-                    $("#list").html('');
-                    var json = eval(response); //对象
-                    console.log(json);//可以在控制台查看打印的data值
-                    document.getElementById("btn1").value = "aaaaaaaaaaaaaaaaaaaaaaa";
-                    $("label").html(json.average_price);
-                }
-            });
-        }
-
-
-        //1、最基本的弹出窗口代码
-        function btn2() {
-//            window.open('page.html', 'newwindow', 'height=100, width=400, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no') //这句要写成一行
-            //openwin();
-            var obj = new Object();
-            obj.name = "test";
-            window.showModalDialog("detail", obj, "dialogWidth=200px;dialogHeight=100px");
-
-        }
-
-        /***
-         * @param {string} cookieName Cookie名称
-         * @param {string} cookieValue Cookie值
-         * @param {number} nDays Cookie过期天数
-         */
-        function SetCookie(cookieName, cookieValue, nDays) {
-            /*当前日期*/
-            var today = new Date();
-            /*Cookie过期时间*/
-            var expire = new Date();
-            /*如果未设置nDays参数或者nDays为0，取默认值1*/
-            if (nDays == null || nDays == 0) nDays = 1;
-            /*计算Cookie过期时间*/
-            expire.setTime(today.getTime() + 3600000 * 24 * nDays);
-            /*设置Cookie值*/
-            document.cookie = cookieName + "=" + escape(cookieValue)
-                + ";expires=" + expire.toGMTString();
+            window.location.href = 'page.html';
         }
 
         function login1() {
-            var username = $("user").value;
-            var password = $("pass").value;
-            //alert(111);
+            var username = $("#user").val();
+            alert(username);
+            var password = $("#pass").value;
             /*是否选中7天内无需登录*/
-            var save = $("save").checked;
-            if (username != "admin") {
-
-            }
-            //  if (password == "admin") {
-            if (save) {
-                SetCookie("username", username, 7);
-                SetCookie("password", password, 1);
-            }
-            /*跳转到ex8.html页面*/
-            document.location = "detail.html";
-            //document.location = "all";
-
-            //document.location.href="detail";
-//            } else {
-//                alert("用户名或密码错误！");
-//            }
+            var save = $("#save").checked;
+            document.location = "detail.html?username=" + username;
         }
-
-        //        function $(id) {
-        //            return document.getElementById(id);
-        //        }
-
-        function openwin() {
-            window.open("page", "", "width=200,height=200")
-        }
-
-        function get_cookie(Name) {
-            var search = Name + "="
-            var returnvalue = "";
-            if (document.cookie.length > 0) {
-                offset = document.cookie.indexOf(search)
-                if (offset != -1) {
-                    offset += search.length
-                    end = document.cookie.indexOf(";", offset);
-                    if (end == -1)
-                        end = document.cookie.length;
-                    returnvalue = unescape(document.cookie.substring(offset, end))
-                }
-            }
-            return returnvalue;
-        }
-
 
     </script>
 </head>

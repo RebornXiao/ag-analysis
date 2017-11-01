@@ -4,40 +4,16 @@
     <meta charset="UTF-8"/>
     <title>Title</title>
     <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
-
+    <!--//<script type="text/javascript" src="js/jquery.geturlparam.min.js"></script>-->
+    <script type="text/javascript" src="js/jquery.getUrlParam.js"></script>
 </head>
 <body>
 detail
 <label id="lab">111</label>
-<script>
-    //        var obj = window.dialogArguments;
-    //        alert("您传递的参数为：" + obj.name);
-
-    function get_cookie(Name) {
-        var search = Name + "="
-        var returnvalue = "";
-        if (document.cookie.length > 0) {
-            offset = document.cookie.indexOf(search);
-            if (offset != -1) {
-                offset += search.length
-                end = document.cookie.indexOf(";", offset);
-                if (end == -1) {
-                    end = document.cookie.length;
-                }
-                returnvalue = unescape(document.cookie.substring(offset, end))
-            }
-        }
-        return returnvalue;
-    }
-
-//    function $(id) {
-//        return document.getElementById(id);
-//    }
-
-    var user1 = get_cookie("username");
-    alert(user1);
-    var aa = $("lab").html();
-    alert(aa);
+<script type="text/javascript">
+    var name=UrlParm.parm("username");
+    alert(name);
 </script>
+<button id="btn" onclick="btn1()">我在这里</button>
 </body>
 </html>
