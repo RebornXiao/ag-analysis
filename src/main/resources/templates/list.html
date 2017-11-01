@@ -10,7 +10,34 @@
     <script type="text/javascript">
 
         function btn() {
-
+            $.ajax({
+                url: '/ag/all',
+                type: "GET",
+                contentType: 'application/json;charset=utf-8',
+                data: "json",
+                cache: false,
+                beforeSend: function () {
+                    $("#list").html('加载中...');
+                }, //加载执行方法
+                error: function () {
+                    alert("error");
+                },  //错误执行方法
+                //成功执行方法
+                success: function (response) {
+                    $("#list").html('');
+                    var json = eval(response); //数组
+                    console.log(json);//可以在控制台查看打印的data值
+                    $.each(json, function (index, item) {
+                        //循环获取数据
+                        var time = json[index].time;
+                        var open_price = json[index].open_price;
+                        var max_price = json[index].max_price;
+                        $("#list").html($("#list").html() + time + " - " + open_price + " - " + max_price + " <br/> ");
+                    });
+                    document.getElementById("btn").value = json[23].open_price;
+                    $("label").html("aaaa");
+                }
+            });
         }
 
         function btn1() {

@@ -79,7 +79,17 @@ public class AgDataController {
     @RequestMapping(value = "all")
     @ResponseBody
     public Iterable<AgData> getAll() {
-        return agDataService.getAll();
+        List<AgData> agDatas = new ArrayList<>();
+        for (int i = 0; i < 10000; i++) {
+            AgData one = agDataService.findOne(i);
+            if (one != null) {
+                agDatas.add(one);
+            }
+            if (agDatas.size() == 10) {
+                break;
+            }
+        }
+        return agDatas;
     }
 
 
