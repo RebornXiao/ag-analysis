@@ -33,7 +33,7 @@ $(function () {
     $('#test1').bind('click', function () {
 
         var list = document.getElementsByTagName("li");
-        alert(list.length);
+        //alert(list.length);
         //给每个li绑定事件
         for (var i = 0; i < list.length; i++) {
             //alert(i);
@@ -41,7 +41,7 @@ $(function () {
                 document.location ="detail.html?username="+$(this).text();
             }
         }
-        alert(55555);
+
     });
 
     function addLi(username) {

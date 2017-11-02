@@ -10,65 +10,25 @@
     <script type="text/javascript">
 
         function btn() {
-            $.ajax({
-                url: '/ag/all',
-                type: "GET",
-                contentType: 'application/json;charset=utf-8',
-                data: "json",
-                cache: false,
-                beforeSend: function () {
-                    $("#list").html('加载中...');
-                }, //加载执行方法
-                error: function () {
-                    alert("error");
-                },  //错误执行方法
-                //成功执行方法
-                success: function (response) {
-                    $("#list").html('');
-                    var json = eval(response); //数组
-                    console.log(json);//可以在控制台查看打印的data值
-                    $.each(json, function (index, item) {
-                        //循环获取数据
-                        var time = json[index].time;
-                        var open_price = json[index].open_price;
-                        var max_price = json[index].max_price;
-                        $("#list").html($("#list").html() + time + " - " + open_price + " - " + max_price + " <br/> ");
-                    });
-                    document.getElementById("btn").value = json[23].open_price;
-                    $("label").html("aaaa");
-                }
-            });
+            //循环获取数据
+
+            //<![CDATA[
+            var msg = "<li><a href='javascript:void(0)'>删我</a><span style='color:yellow;'/> </li>  "
+            $("#list").append(msg);
+            $("#list").append(" <li>什么<button id='btn1' onclick='btn1()'>加载</button></li> ");
+            //]]>
         }
 
-        function btn1() {
-            window.location.href = 'page.html';
-        }
+        function btnq1() {
 
-        function login1() {
-            var username = $("#user").val();
-            alert(username);
-            var password = $("#pass").value;
-            /*是否选中7天内无需登录*/
-            var save = $("#save").checked;
-            document.location = "detail.html?username=" + username;
         }
 
     </script>
 </head>
 <body>
 <button id="btn" onclick="btn()"> 11111</button>
-<button id="btn1" onclick="btn1()"> 22222</button>
-<button id="btn2" onclick="btn2()"> 33333</button>
-<img id="img" src="/images/logo.png"/>
-<label id="label"> 哈哈 ~~~~~ </label>
-<div id="main">
-    <div><span>用户名：</span><input type="text" id="user"/></div>
-    <div><span>密码：</span><input type="password" id="pass"/></div>
-    <div>
-        <input type="checkbox" id="save" checked="checked"/>
-        <button id="login1" onclick="login1()">登录</button>
-    </div>
-</div>
-<ul id="list"></ul>
+<ul id="list">
+    <!--<li>什么<button id="btn1" onclick="btn1()">加载</button></li>-->
+</ul>
 </body>
 </html>

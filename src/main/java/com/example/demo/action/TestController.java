@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
 
-    @RequestMapping(value = "{itemId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/test/{itemId}", method = RequestMethod.GET)
     public String addItemToCart(@PathVariable("itemId") Long itemId) {
 
 
